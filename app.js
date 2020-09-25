@@ -12,7 +12,7 @@ function app(people){
       searchResults = searchByName(people);
       break;
     case 'no':
-      // TODO: search by traits
+      // TODO: search by traits (ERIC)
       break;
       default:
     app(people); // restart app
