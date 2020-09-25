@@ -12,15 +12,16 @@ function app(people){
       searchResults = searchByName(people);
       break;
     case 'no':
+      searchResults = searchByTrait(people);
       // TODO: search by traits (ERIC)
       break;
       default:
     app(people); // restart app
       break;
   }
-  
+  var userSelection = selectPerson(searchResults)
   // Call the mainMenu function ONLY after you find the SINGLE person you are looking for
-  mainMenu(searchResults, people);
+  mainMenu(userSelection, people);
 }
 
 // Menu function to call once you find who you are looking for
@@ -57,8 +58,8 @@ function mainMenu(person, people){
 
 function searchByName(people){
   // TODO (JJ) - user validation here
-  let firstName = promptFor("What is the person's first name?", capitalizeString);
-  let lastName = promptFor("What is the person's last name?", capitalizeString);
+  let firstName = promptFor("What is the person's first name?", validateAndCapitalizeString);
+  let lastName = promptFor("What is the person's last name?", validateAndCapitalizeString);
 
   let foundPerson = people.filter(function(person){
     if(person.firstName === firstName && person.lastName === lastName){
@@ -68,8 +69,36 @@ function searchByName(people){
       return false;
     }
   })
-  // TODO: find the person using the name they entered
+  // TODO: find the person using the name they entered (JJ)
   return foundPerson;
+}
+
+function searchByTrait(people){
+  let userInput = promptFor("What trait (or additional traits) would you like to search for? <gender, height, weight, occupation, eye color, finished>")
+  let searchResult;
+  switch(userInput){
+    case "gender":
+      searchResult = searchByGender(people);
+    break;
+    case "height":
+      searchResult = searchByHeight(people);
+    break;
+    case "weight":
+      searchResult = searchByWeight(people);
+    break;
+    case "occupation":
+      searchResult = searchByOccupation(people);
+    break;
+    case "eyeColor":
+      searchResult = searchByeyeColor(people);
+    break;
+    case "finished":
+      return searchResult;
+    default:
+    return app(people); // ask again
+
+  }
+  searchByTrait(searchResult);
 }
 
 // alerts a list of people
@@ -91,7 +120,7 @@ function displayPerson(person){
 // function that prompts and validates user input (JJ)
 function promptFor(question, valid){
   do{
-    var response = prompt(question).trim();
+    var response = prompt(question);
   } while(!response || !valid(response));
   return response;
 }
@@ -106,16 +135,10 @@ function chars(input){
   return true; // default validation only
 }
 
-// converts input to a string word with first letter capitalize,
-// and checks for spaces. Reprompts if any spaces.
+// converts input to a string word with first letter capitalize
+
 function validateAndCapitalizeString(input){
   input.toLowerCase();
-  input.charAt(0).toUpperCase() + string.slice(1);
-
-  for(i=0; i < input.length-1; i++){
-    if(input[i] === ""){
-      return false;
-    }
-  }
-  return true;
+  var correctedString = input.charAt(0).toUpperCase() + input.slice(1);
+  return correctedString;
 }
