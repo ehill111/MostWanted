@@ -56,8 +56,9 @@ function mainMenu(person, people){
 }
 
 function searchByName(people){
-  let firstName = promptFor("What is the person's first name?", chars);
-  let lastName = promptFor("What is the person's last name?", chars);
+  // TODO (JJ) - user validation here
+  let firstName = promptFor("What is the person's first name?", capitalizeString);
+  let lastName = promptFor("What is the person's last name?", capitalizeString);
 
   let foundPerson = people.filter(function(person){
     if(person.firstName === firstName && person.lastName === lastName){
@@ -87,7 +88,7 @@ function displayPerson(person){
   alert(personInfo);
 }
 
-// function that prompts and validates user input
+// function that prompts and validates user input (JJ)
 function promptFor(question, valid){
   do{
     var response = prompt(question).trim();
@@ -95,7 +96,7 @@ function promptFor(question, valid){
   return response;
 }
 
-// helper function to pass into promptFor to validate yes/no answers
+// helper function to pass into promptFor to validate yes/no answers 
 function yesNo(input){
   return input.toLowerCase() == "yes" || input.toLowerCase() == "no";
 }
@@ -103,4 +104,18 @@ function yesNo(input){
 // helper function to pass in as default promptFor validation
 function chars(input){
   return true; // default validation only
+}
+
+// converts input to a string word with first letter capitalize,
+// and checks for spaces. Reprompts if any spaces.
+function validateAndCapitalizeString(input){
+  input.toLowerCase();
+  input.charAt(0).toUpperCase() + string.slice(1);
+
+  for(i=0; i < input.length-1; i++){
+    if(input[i] === ""){
+      return false;
+    }
+  }
+  return true;
 }
