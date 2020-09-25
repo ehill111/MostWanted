@@ -12,12 +12,13 @@ function app(people){
       searchResults = searchByName(people);
       break;
     case 'no':
-      
+      // TODO: search by traits (ERIC)
+  let searchTrait = promptFor("Please provide the trait you would like to use as a search factor. Enter one of the following:")
+      searchResults = searchByTrait(people)
       break;
       default:
     app(people); // restart app
       break;
-      // TODO: search by traits (ERIC)
   }
   
   // Call the mainMenu function ONLY after you find the SINGLE person you are looking for
