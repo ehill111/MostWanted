@@ -12,17 +12,15 @@ function app(people){
       searchResults = searchByName(people);
       break;
     case 'no':
-      // TODO: search by traits (ERIC)
-  let searchTrait = promptFor("Please provide the trait you would like to use as a search factor. Enter one of the following:")
-      searchResults = searchByTrait(people)
       break;
       default:
     app(people); // restart app
       break;
+      // TODO: search by traits (ERIC)
   }
-  
+  //var userSelection = selectPerson(searchResults)
   // Call the mainMenu function ONLY after you find the SINGLE person you are looking for
-  mainMenu(searchResults, people);
+  mainMenu(userSelection, people);
 }
 
 // Menu function to call once you find who you are looking for
@@ -58,8 +56,9 @@ function mainMenu(person, people){
 }
 
 function searchByName(people){
-  let firstName = promptFor("What is the person's first name?", chars);
-  let lastName = promptFor("What is the person's last name?", chars);
+  // TODO (JJ) - user validation here
+  let firstName = promptFor("What is the person's first name?", validateAndCapitalizeString);
+  let lastName = promptFor("What is the person's last name?", validateAndCapitalizeString);
 
   let foundPerson = people.filter(function(person){
     if(person.firstName === firstName && person.lastName === lastName){
@@ -69,8 +68,43 @@ function searchByName(people){
       return false;
     }
   })
-  // TODO: find the person using the name they entered
+  // TODO: find the person using the name they entered (JJ)
   return foundPerson;
+}
+
+function searchByTrait(people){
+  let userInput = promptFor("What trait (or additional traits) would you like to search for? <gender, height, weight, occupation, eye color, finished>")
+  let searchResult;
+  switch(userInput){
+    case "gender":
+      searchResult = searchByGender(people);
+      break;
+      //traits = people.filter(function(trait) {
+        //if(people.gender == userinput)
+        //console.log(userInput)
+      //{return array.indexOf(value) == index; Code that supposedly stops duplicates
+      //return true;
+      //});
+    
+    case "height":
+      searchResult = searchByHeight(people);
+    break;
+    case "weight":
+      searchResult = searchByWeight(people);
+    break;
+    case "occupation":
+      searchResult = searchByOccupation(people);
+    break;
+    case "eyeColor":
+      searchResult = searchByeyeColor(people);
+    break;
+    case "finished":
+      return searchResult;
+    default:
+    return app(people); // ask again
+
+  }
+  searchByTrait(searchResult);
 }
 
 // alerts a list of people
@@ -89,15 +123,15 @@ function displayPerson(person){
   alert(personInfo);
 }
 
-// function that prompts and validates user input
+// function that prompts and validates user input (JJ)
 function promptFor(question, valid){
   do{
-    var response = prompt(question).trim();
+    var response = prompt(question);
   } while(!response || !valid(response));
   return response;
 }
 
-// helper function to pass into promptFor to validate yes/no answers
+// helper function to pass into promptFor to validate yes/no answers 
 function yesNo(input){
   return input.toLowerCase() == "yes" || input.toLowerCase() == "no";
 }
@@ -105,4 +139,12 @@ function yesNo(input){
 // helper function to pass in as default promptFor validation
 function chars(input){
   return true; // default validation only
+}
+
+// converts input to a string word with first letter capitalize
+
+function validateAndCapitalizeString(input){
+  input.toLowerCase();
+  var correctedString = input.charAt(0).toUpperCase() + input.slice(1);
+  return correctedString;
 }
