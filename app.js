@@ -112,14 +112,15 @@ console.log(weightSelection);
     break;
 
     case "occupation":
-      searchResult = searchByOccupation(people);
-      const weightSelection = data.filter(function(trait){
-  if(trait.weight === userinput) {
+      //searchResult = searchByOccupation(people);
+      const occupationSelection = data.filter(function(trait){
+  if(trait.occupation === userinput) {
     return true;
   }
 });
-console.log(weightSelection);
+console.log(occupationSelection);
     break;
+    
     case "eyeColor":
       searchResult = searchByeyeColor(people);
     break;
