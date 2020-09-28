@@ -83,7 +83,7 @@ function searchByTrait(people){
     return true;
   }
 });
-console.log(genderSelection);
+console.log(genderSelection);//Most likely will have to change to userinput. Same with console.log ().
       break;
       //traits = people.filter(function(trait) {
         //if(people.gender == userinput)
@@ -92,19 +92,33 @@ console.log(genderSelection);
       //return true;
       //});
     case "height":
-      searchResult = searchByHeight(people);
+      //searchResult = searchByHeight(people);
       const heightSelection = data.filter(function(trait){
   if(trait.height === userinput) {
     return true;
   }
 });
-console.log(traitSelection);
-    break;
+console.log(heightSelection);
+      break;
+
     case "weight":
-      searchResult = searchByWeight(people);
+      //searchResult = searchByWeight(people);
+      const weightSelection = data.filter(function(trait){
+  if(trait.weight === userinput) {
+    return true;
+  }
+});
+console.log(weightSelection);
     break;
+
     case "occupation":
       searchResult = searchByOccupation(people);
+      const weightSelection = data.filter(function(trait){
+  if(trait.weight === userinput) {
+    return true;
+  }
+});
+console.log(weightSelection);
     break;
     case "eyeColor":
       searchResult = searchByeyeColor(people);
