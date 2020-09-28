@@ -83,7 +83,7 @@ function searchByTrait(people){
     return true;
   }
 });
-console.log(genderSelection);//Most likely will have to change to userinput. Same with console.log ().
+//Most likely will have to change to userinput. Same with console.log ().
       break;
       //traits = people.filter(function(trait) {
         //if(people.gender == userinput)
@@ -98,7 +98,6 @@ console.log(genderSelection);//Most likely will have to change to userinput. Sam
     return true;
   }
 });
-console.log(heightSelection);
       break;
 
     case "weight":
@@ -108,7 +107,6 @@ console.log(heightSelection);
     return true;
   }
 });
-console.log(weightSelection);
     break;
 
     case "occupation":
@@ -118,7 +116,6 @@ console.log(weightSelection);
     return true;
   }
 });
-console.log(occupationSelection);
     break;
 
     case "eyeColor":
@@ -128,9 +125,8 @@ console.log(occupationSelection);
     return true;
   }
 });
-console.log(eyeColorSelection);
     break;
-    
+
     case "finished":
       return searchResult;
     default:
