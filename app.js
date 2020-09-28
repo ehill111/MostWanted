@@ -55,12 +55,17 @@ function mainMenu(person, people){
 
   switch(displayOption){
     case "info":
-    // TODO: get person's info
+      displayPerson(person);
     break;
     case "family":
     displayFamily(person, people);
     break;
     case "descendants":
+    // TODO: get person's descendants
+    // recursion is a form of iteration. think of it as a for loop
+    //use Joy Madden as test case
+      let descendants = [];
+      getDescendants(person, people, descendants);
     break;
     case "restart":
     app(people); // restart
@@ -72,6 +77,22 @@ function mainMenu(person, people){
   }
 }
 
+// function getDescendants(i){ //i = 2
+//   i++;
+//   if(i < 3){
+//     getDescendants(i);
+//   }
+  
+// }
+
+function getDescendants(person, people, descendants){ //Joy Madden
+  //array.filter to filter out everyone who is a child of person i.e. 4 people
+  //for loop to iterate over person's descendants
+  //use recursion by calling getDescendants inside the for loop
+  //i.e. getDescendants(foundDescendants[0], people);
+
+}
+
 function searchByName(people){
   let firstName = promptFor("What is the person's first name?", validateAndCapitalizeString);
   let lastName = promptFor("What is the person's last name?", validateAndCapitalizeString);
@@ -81,7 +102,7 @@ function searchByName(people){
       return true;
     }
     else{
-      return false;
+      return false;f
     }
   })
   return foundPerson;
@@ -168,7 +189,7 @@ function searchByOccupation(people){
 }
 
 function searchByEyeColor(people){
-  let userInput = promptFor("What occupation would you like to search for?",chars);
+  let userInput = promptFor("What eye color would you like to search for?",chars);
   var eyeColorSelection = people.filter(function(person){
     if(person.eyeColor === userInput) {
       return true;
@@ -189,8 +210,17 @@ function displayPerson(person){
   // height, weight, age, name, occupation, eye color.
   let personInfo = "First Name: " + person.firstName + "\n";
   personInfo += "Last Name: " + person.lastName + "\n";
+  personInfo += "Gender:" + person.gender + "\n";
+  personInfo += "Date of Birth:" + person.dob + "\n";
+  personInfo += "Height:" + person.height + "\n";
+  personInfo += "Weight:" + person.weight + "\n";
+  personInfo += "Eye Color:" + person.eyeColor + "\n";
+  personInfo += "Occupation:" + person.occupation + "\n";
+  personInfo += "Parents:" + person.parents + "\n";
+  personInfo += "Current Spouse:" + person.currentSpouse + "\n";
   // TODO: finish getting the rest of the information to display
   alert(personInfo);
+  return(personInfo);
 }
 
 function displayFamily(person, people){
