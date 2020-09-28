@@ -91,6 +91,22 @@ function getDescendants(person, people, descendants){ //Joy Madden
   //use recursion by calling getDescendants inside the for loop
   //i.e. getDescendants(foundDescendants[0], people);
 
+  var foundDescendants = people.filter(function(children){
+    if(person.id === children.parents[0] || person.id === children.parents[1]){
+      descendants.push(children);
+      return true;
+    }
+    else{
+      return false;
+    }
+  })
+
+  for(var i = 0; i < foundDescendants.length-1; i++){
+    getDescendants(foundDescendants[i], people, descendants);
+  }
+
+  return displayPeople(descendants);
+
 }
 
 function searchByName(people){
@@ -102,7 +118,7 @@ function searchByName(people){
       return true;
     }
     else{
-      return false;f
+      return false;
     }
   })
   return foundPerson;
@@ -216,9 +232,7 @@ function displayPerson(person){
   personInfo += "Weight:" + person.weight + "\n";
   personInfo += "Eye Color:" + person.eyeColor + "\n";
   personInfo += "Occupation:" + person.occupation + "\n";
-  personInfo += "Parents:" + person.parents + "\n";
-  personInfo += "Current Spouse:" + person.currentSpouse + "\n";
-  // TODO: finish getting the rest of the information to display
+
   alert(personInfo);
   return(personInfo);
 }
