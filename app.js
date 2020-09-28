@@ -15,6 +15,9 @@ function app(people){
       searchResults = searchByTrait(people);
       break;
       default:
+      //if(searchType != "Yes" || searchType != "yes" || searchType != "No" || searchType != "no"){
+        //searchResults = prompt("Please enter 'Yes' or 'No'.")
+      //}
     app(people); // restart app
       break;
   }
@@ -30,6 +33,9 @@ function selectPerson(people){
   let foundPerson = people.filter(function(person){
     if(person.firstName === finalSelectionPrompt){
       return true;
+    }
+    else if{
+      person.firstName == 
     }
     else{
       return false;
