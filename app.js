@@ -120,10 +120,17 @@ console.log(weightSelection);
 });
 console.log(occupationSelection);
     break;
-    
+
     case "eyeColor":
-      searchResult = searchByeyeColor(people);
+      //searchResult = searchByeyeColor(people);
+       const eyeColorSelection = data.filter(function(trait){
+  if(trait.eyeColor === userinput) {
+    return true;
+  }
+});
+console.log(eyeColorSelection);
     break;
+    
     case "finished":
       return searchResult;
     default:
