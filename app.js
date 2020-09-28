@@ -27,7 +27,7 @@ function app(people){
 function selectPerson(people){
   displayPeople(people)
   let finalSelectionPrompt = promptFor("Please pick your option from the list <first name>", chars);
-  let foundPerson = people.filter(function(person){
+  let foundPeople = people.filter(function(person){
     if(person.firstName === finalSelectionPrompt){
       return true;
     }
@@ -36,7 +36,7 @@ function selectPerson(people){
     }
   })
 
-  let person = foundPerson[0];
+  let person = foundPeople[0];
   return person;
   
 }
@@ -58,10 +58,9 @@ function mainMenu(person, people){
     // TODO: get person's info
     break;
     case "family":
-    // TODO: get person's family
+    displayFamily(person, people);
     break;
     case "descendants":
-    // TODO: get person's descendants
     break;
     case "restart":
     app(people); // restart
@@ -192,6 +191,61 @@ function displayPerson(person){
   personInfo += "Last Name: " + person.lastName + "\n";
   // TODO: finish getting the rest of the information to display
   alert(personInfo);
+}
+
+function displayFamily(person, people){
+  var parents;
+  var currentSpouse;
+  var siblings = [];
+  var familyMembers = [];
+  if (person.parents.length > 0){
+    var parentsId = person.parents.filter(function(parent){
+      return true;
+    }); 
+
+      parents = people.filter(function(person){
+        if(parentsId[0] == person.id || parentsId[1] == person.id){
+          person.Relation = "Parent";
+          familyMembers.push(person);
+          return true;
+        }
+        else{
+          return false;
+        }
+        });     
+  }
+
+  if (person.currentSpouse !== null){
+    currentSpouse = people.filter(function(person){
+      if(person.currentSpouse === person.id){
+        person.Relation = "Spouse";
+        familyMembers.push(person);
+        return true;
+      }
+      else{
+        return false;
+      }
+      });     
+  }
+
+  siblings = people.filter(function(person){
+  if(person.parents[0] == parentsId[0] || person.parents[1] == parentsId[0]){
+    person.Relation = "Sibling";
+    familyMembers.push(person);
+    return true;
+  }
+  else if(person.parents[0] == parentsId[1] || person.parents[1] == parentsId[1]){
+    person.Relation = "Sibling";
+    familyMembers.push(person);
+    return true;
+  }
+  else{
+    return false;
+  }
+  });
+
+  displayPeople(familyMembers);
+  return mainMenu(person,people);
 }
 
 // function that prompts and validates user input (JJ)
