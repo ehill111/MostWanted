@@ -19,7 +19,12 @@ function app(people){
     app(people); // restart app
       break;
   }
+  // call function selectPerson that passes in search results
+  // if search results has more than one item in array, offer option to user of picking
+  // else return to this function and move to MainMenu
+
   var userSelection = selectPerson(searchResults)
+
   // Call the mainMenu function ONLY after you find the SINGLE person you are looking for
   mainMenu(userSelection, people);
 }
@@ -57,7 +62,6 @@ function mainMenu(person, people){
 }
 
 function searchByName(people){
-  // TODO (JJ) - user validation here
   let firstName = promptFor("What is the person's first name?", validateAndCapitalizeString);
   let lastName = promptFor("What is the person's last name?", validateAndCapitalizeString);
 
@@ -69,12 +73,11 @@ function searchByName(people){
       return false;
     }
   })
-  // TODO: find the person using the name they entered (JJ)
   return foundPerson;
 }
 
 function searchByTrait(people){
-  let userInput = promptFor("What trait (or additional traits) would you like to search for? <gender, height, weight, occupation, eye color, finished>")
+  let userInput = promptFor("What trait (or additional traits) would you like to search for? <gender, height, weight, occupation, eye color, finished>",chars);
   let searchResult;
   switch(userInput){
     case "gender":
