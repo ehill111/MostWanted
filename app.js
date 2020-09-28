@@ -91,6 +91,8 @@ function searchByName(people){
 function searchByTrait(people){
   let userInput = promptFor("What trait (or additional traits) would you like to search for? <gender, height, weight, occupation, eye color, finished>",chars);
   let searchResult = people;
+  let searchComplete = false;
+
   switch(userInput){
     case "gender":
       searchResult = searchByGender(people);
@@ -108,16 +110,21 @@ function searchByTrait(people){
       searchResult = searchByEyeColor(people);
       break;
     case "finished":
-      return searchResult;
+      searchComplete = true;
+      break;
     default:
     return app(people); // ask again
 
     // validation - if selection doesn't exist in data, reprompt
 
   }
-  searchByTrait(searchResult);
-  let foundList = searchResult;
-  return foundList;
+
+  if(searchComplete == false){
+    return searchByTrait(searchResult);
+  }
+  
+  return searchResult;
+  
 }
 
 function searchByGender(people){
