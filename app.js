@@ -12,20 +12,32 @@ function app(people){
       searchResults = searchByName(people);
       break;
     case 'no':
+      searchResults = searchByTrait(people);
       break;
       default:
     app(people); // restart app
       break;
-      // TODO: search by traits (ERIC)
   }
-  // call function selectPerson that passes in search results
-  // if search results has more than one item in array, offer option to user of picking
-  // else return to this function and move to MainMenu
 
   var userSelection = selectPerson(searchResults)
-
   // Call the mainMenu function ONLY after you find the SINGLE person you are looking for
   mainMenu(userSelection, people);
+}
+
+function selectPerson(people){
+  displayPeople(people)
+  let finalSelectionPrompt = promptFor("Please pick your option from the list <first name>", chars);
+  let foundPerson = people.filter(function(person){
+    if(person.firstName === finalSelectionPrompt){
+      return true;
+    }
+    else{
+      return false;
+    }
+  })
+
+  return foundPerson;
+  
 }
 
 // Menu function to call once you find who you are looking for
