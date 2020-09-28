@@ -90,7 +90,7 @@ function searchByName(people){
 
 function searchByTrait(people){
   let userInput = promptFor("What trait (or additional traits) would you like to search for? <gender, height, weight, occupation, eye color, finished>",chars);
-  let searchResult;
+  let searchResult = people;
   switch(userInput){
     case "gender":
       searchResult = searchByGender(people);
@@ -113,6 +113,8 @@ function searchByTrait(people){
     return app(people); // ask again
   }
   searchByTrait(searchResult);
+  let foundList = searchResult;
+  return foundList;
 }
 
 function searchByGender(people){
