@@ -91,7 +91,6 @@ console.log(genderSelection);
       //{return array.indexOf(value) == index; Code that supposedly stops duplicates
       //return true;
       //});
-    
     case "height":
       searchResult = searchByHeight(people);
       const heightSelection = data.filter(function(trait){
