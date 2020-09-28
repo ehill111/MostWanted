@@ -77,15 +77,13 @@ function searchByTrait(people){
   let searchResult;
   switch(userInput){
     case "gender":
-      searchResult = searchByGender(people);
-      
-      const traitSelection = data.filter(function(trait){
-  if(trait.gender === "male") {
+      //searchResult = searchByGender(people);
+      const genderSelection = data.filter(function(trait){
+  if(trait.gender === userinput) {
     return true;
   }
 });
-
-console.log(traitSelection);
+console.log(genderSelection);
       break;
       //traits = people.filter(function(trait) {
         //if(people.gender == userinput)
@@ -96,6 +94,12 @@ console.log(traitSelection);
     
     case "height":
       searchResult = searchByHeight(people);
+      const heightSelection = data.filter(function(trait){
+  if(trait.height === userinput) {
+    return true;
+  }
+});
+console.log(traitSelection);
     break;
     case "weight":
       searchResult = searchByWeight(people);
