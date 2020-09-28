@@ -19,7 +19,7 @@ function app(people){
       break;
   }
 
-  var userSelection = selectPerson(searchResults)
+  const userSelection = selectPerson(searchResults)
   // Call the mainMenu function ONLY after you find the SINGLE person you are looking for
   mainMenu(userSelection, people);
 }
@@ -35,8 +35,9 @@ function selectPerson(people){
       return false;
     }
   })
-
-  return foundPerson;
+  
+  let person = foundPerson[0];
+  return person;
   
 }
 
@@ -92,29 +93,11 @@ function searchByTrait(people){
   let searchResult;
   switch(userInput){
     case "gender":
-      //searchResult = searchByGender(people);
-      const genderSelection = data.filter(function(trait){
-  if(trait.gender === userinput) {
-    return true;
-  }
-});
-//Most likely will have to change to userinput. Same with console.log ().
+      searchResult = searchByGender(people);
       break;
-      //traits = people.filter(function(trait) {
-        //if(people.gender == userinput)
-        //console.log(userInput)
-      //{return array.indexOf(value) == index; Code that supposedly stops duplicates
-      //return true;
-      //});
     case "height":
-      //searchResult = searchByHeight(people);
-      const heightSelection = data.filter(function(trait){
-  if(trait.height === userinput) {
-    return true;
-  }
-});
+      searchResult = searchByHeight(people);
       break;
-
     case "weight":
       //searchResult = searchByWeight(people);
       const weightSelection = data.filter(function(trait){
@@ -149,6 +132,28 @@ function searchByTrait(people){
 
   }
   searchByTrait(searchResult);
+}
+
+function searchByGender(people){
+  let userInput = promptFor("Which gender would you like to search for? <male, female>",chars);
+  var genderSelection = people.filter(function(trait){
+    if(trait.gender === userInput) {
+      return true;
+    }
+})
+
+  return genderSelection;
+}
+
+function searchByHeight(people){
+  let userInput = promptFor("What height would you like to search for? <Enter height by inches>",chars);
+  var heightSelection = people.filter(function(trait){
+    if(trait.height === userInput) {
+      return true;
+    }
+})
+
+  return heightSelection;
 }
 
 // alerts a list of people
