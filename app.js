@@ -162,7 +162,7 @@ function searchByOccupation(people){
 }
 
 function searchByEyeColor(people){
-  let userInput = promptFor("What occupation would you like to search for?",chars);
+  let userInput = promptFor("What eye color would you like to search for?",chars);
   var eyeColorSelection = people.filter(function(person){
     if(person.eyeColor === userInput) {
       return true;
