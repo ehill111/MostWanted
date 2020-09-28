@@ -114,9 +114,6 @@ function searchByTrait(people){
       break;
     default:
     return app(people); // ask again
-
-    // validation - if selection doesn't exist in data, reprompt
-
   }
 
   if(searchComplete == false){
