@@ -18,12 +18,7 @@ function app(people){
       break;
       // TODO: search by traits (ERIC)
   }
-  // call function selectPerson that passes in search results
-  // if search results has more than one item in array, offer option to user of picking
-  // else return to this function and move to MainMenu
-
-  var userSelection = selectPerson(searchResults)
-
+  //var userSelection = selectPerson(searchResults)
   // Call the mainMenu function ONLY after you find the SINGLE person you are looking for
   mainMenu(userSelection, people);
 }
@@ -61,6 +56,7 @@ function mainMenu(person, people){
 }
 
 function searchByName(people){
+  // TODO (JJ) - user validation here
   let firstName = promptFor("What is the person's first name?", validateAndCapitalizeString);
   let lastName = promptFor("What is the person's last name?", validateAndCapitalizeString);
 
@@ -72,21 +68,16 @@ function searchByName(people){
       return false;
     }
   })
+  // TODO: find the person using the name they entered (JJ)
   return foundPerson;
 }
 
 function searchByTrait(people){
-  let userInput = promptFor("What trait (or additional traits) would you like to search for? <gender, height, weight, occupation, eye color, finished>",chars);
+  let userInput = promptFor("What trait (or additional traits) would you like to search for? <gender, height, weight, occupation, eye color, finished>")
   let searchResult;
   switch(userInput){
     case "gender":
-      //searchResult = searchByGender(people);
-      const genderSelection = data.filter(function(trait){
-  if(trait.gender === userinput) {
-    return true;
-  }
-});
-//Most likely will have to change to userinput. Same with console.log ().
+      searchResult = searchByGender(people);
       break;
       //traits = people.filter(function(trait) {
         //if(people.gender == userinput)
@@ -94,42 +85,19 @@ function searchByTrait(people){
       //{return array.indexOf(value) == index; Code that supposedly stops duplicates
       //return true;
       //});
+    
     case "height":
-      //searchResult = searchByHeight(people);
-      const heightSelection = data.filter(function(trait){
-  if(trait.height === userinput) {
-    return true;
-  }
-});
-      break;
-
+      searchResult = searchByHeight(people);
+    break;
     case "weight":
-      //searchResult = searchByWeight(people);
-      const weightSelection = data.filter(function(trait){
-  if(trait.weight === userinput) {
-    return true;
-  }
-});
+      searchResult = searchByWeight(people);
     break;
-
     case "occupation":
-      //searchResult = searchByOccupation(people);
-      const occupationSelection = data.filter(function(trait){
-  if(trait.occupation === userinput) {
-    return true;
-  }
-});
+      searchResult = searchByOccupation(people);
     break;
-
     case "eyeColor":
-      //searchResult = searchByeyeColor(people);
-       const eyeColorSelection = data.filter(function(trait){
-  if(trait.eyeColor === userinput) {
-    return true;
-  }
-});
+      searchResult = searchByeyeColor(people);
     break;
-
     case "finished":
       return searchResult;
     default:
