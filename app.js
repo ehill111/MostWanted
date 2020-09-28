@@ -12,15 +12,33 @@ function app(people){
       searchResults = searchByName(people);
       break;
     case 'no':
+      searchResults = searchByTrait(people);
       break;
       default:
     app(people); // restart app
       break;
-      // TODO: search by traits (ERIC)
   }
-  var userSelection = selectPerson(searchResults)
+
+  const userSelection = selectPerson(searchResults)
   // Call the mainMenu function ONLY after you find the SINGLE person you are looking for
   mainMenu(userSelection, people);
+}
+
+function selectPerson(people){
+  displayPeople(people)
+  let finalSelectionPrompt = promptFor("Please pick your option from the list <first name>", chars);
+  let foundPerson = people.filter(function(person){
+    if(person.firstName === finalSelectionPrompt){
+      return true;
+    }
+    else{
+      return false;
+    }
+  })
+  
+  let person = foundPerson[0];
+  return person;
+  
 }
 
 // Menu function to call once you find who you are looking for
@@ -56,7 +74,6 @@ function mainMenu(person, people){
 }
 
 function searchByName(people){
-  // TODO (JJ) - user validation here
   let firstName = promptFor("What is the person's first name?", validateAndCapitalizeString);
   let lastName = promptFor("What is the person's last name?", validateAndCapitalizeString);
 
@@ -68,32 +85,18 @@ function searchByName(people){
       return false;
     }
   })
-  // TODO: find the person using the name they entered (JJ)
   return foundPerson;
 }
 
 function searchByTrait(people){
-  let userInput = promptFor("What trait (or additional traits) would you like to search for? <gender, height, weight, occupation, eye color, finished>")
+  let userInput = promptFor("What trait (or additional traits) would you like to search for? <gender, height, weight, occupation, eye color, finished>",chars);
   let searchResult;
   switch(userInput){
     case "gender":
-      //searchResult = searchByGender(people);
-      const genderSelection = data.filter(function(trait){
-  if(trait.gender === userinput) {
-    return true;
-  }
-});
+      searchResult = searchByGender(people);
       break;
-      //{return array.indexOf(value) == index; Code that supposedly stops duplicates.
-      //return true;
-      //});
     case "height":
-      //searchResult = searchByHeight(people);
-      const heightSelection = data.filter(function(trait){
-  if(trait.height === userinput) {
-    return true;
-  }
-});
+      searchResult = searchByHeight(people);
       break;
     case "weight":
       //searchResult = searchByWeight(people);
@@ -125,6 +128,28 @@ function searchByTrait(people){
     return app(people); // ask again
   }
   searchByTrait(searchResult);
+}
+
+function searchByGender(people){
+  let userInput = promptFor("Which gender would you like to search for? <male, female>",chars);
+  var genderSelection = people.filter(function(trait){
+    if(trait.gender === userInput) {
+      return true;
+    }
+})
+
+  return genderSelection;
+}
+
+function searchByHeight(people){
+  let userInput = promptFor("What height would you like to search for? <Enter height by inches>",chars);
+  var heightSelection = people.filter(function(trait){
+    if(trait.height === userInput) {
+      return true;
+    }
+})
+
+  return heightSelection;
 }
 
 // alerts a list of people
