@@ -83,12 +83,8 @@ function searchByTrait(people){
     return true;
   }
 });
-//Most likely will have to change to userinput. Same with console.log ().
       break;
-      //traits = people.filter(function(trait) {
-        //if(people.gender == userinput)
-        //console.log(userInput)
-      //{return array.indexOf(value) == index; Code that supposedly stops duplicates
+      //{return array.indexOf(value) == index; Code that supposedly stops duplicates.
       //return true;
       //});
     case "height":
@@ -99,7 +95,6 @@ function searchByTrait(people){
   }
 });
       break;
-
     case "weight":
       //searchResult = searchByWeight(people);
       const weightSelection = data.filter(function(trait){
@@ -108,7 +103,6 @@ function searchByTrait(people){
   }
 });
     break;
-
     case "occupation":
       //searchResult = searchByOccupation(people);
       const occupationSelection = data.filter(function(trait){
@@ -117,7 +111,6 @@ function searchByTrait(people){
   }
 });
     break;
-
     case "eyeColor":
       //searchResult = searchByeyeColor(people);
        const eyeColorSelection = data.filter(function(trait){
@@ -126,12 +119,10 @@ function searchByTrait(people){
   }
 });
     break;
-
     case "finished":
       return searchResult;
     default:
     return app(people); // ask again
-
   }
   searchByTrait(searchResult);
 }
