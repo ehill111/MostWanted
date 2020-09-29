@@ -66,6 +66,7 @@ function mainMenu(person, people){
     //use Joy Madden as test case
       let descendants = [];
       getDescendants(person, people, descendants);
+      displayPeople(descendants);
     break;
     case "restart":
     app(people); // restart
@@ -76,14 +77,6 @@ function mainMenu(person, people){
     return mainMenu(person, people); // ask again
   }
 }
-
-// function getDescendants(i){ //i = 2
-//   i++;
-//   if(i < 3){
-//     getDescendants(i);
-//   }
-  
-// }
 
 function getDescendants(person, people, descendants){ //Joy Madden
   //array.filter to filter out everyone who is a child of person i.e. 4 people
@@ -101,11 +94,13 @@ function getDescendants(person, people, descendants){ //Joy Madden
     }
   })
 
-  for(var i = 0; i < foundDescendants.length-1; i++){
-    getDescendants(foundDescendants[i], people, descendants);
+  if (foundDescendants.length === 0){
+    return;
+  } else{
+    for(let i = 0; i < foundDescendants.length; i++){
+      getDescendants(foundDescendants[i], people, descendants);
+    }
   }
-
-  return displayPeople(descendants);
 
 }
 
