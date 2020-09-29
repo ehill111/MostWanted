@@ -10,16 +10,17 @@ function app(people){
   switch(searchType){
     case 'yes':
       searchResults = searchByName(people);
+      alert("Good choice!")
       break;
     case 'no':
       searchResults = searchByTrait(people);
       break;
-      default:
+    default:
     app(people); // restart app
-      break;
+    break;
   }
 
-  const userSelection = selectPerson(searchResults)
+  const userSelection = selectPerson(searchResults);
   // Call the mainMenu function ONLY after you find the SINGLE person you are looking for
   mainMenu(userSelection, people);
 }
@@ -61,12 +62,9 @@ function mainMenu(person, people){
     displayFamily(person, people);
     break;
     case "descendants":
-    // TODO: get person's descendants
-    // recursion is a form of iteration. think of it as a for loop
-    //use Joy Madden as test case
-      let descendants = [];
-      getDescendants(person, people, descendants);
-      displayPeople(descendants);
+    let descendants = [];
+    getDescendants(person, people, descendants);
+    displayPeople(descendants);
     break;
     case "restart":
     app(people); // restart
@@ -144,7 +142,7 @@ function searchByTrait(people){
       searchComplete = true;
       break;
     default:
-    return app(people); // ask again
+    return app(people); 
   }
 
   if(searchComplete == false){
@@ -160,7 +158,7 @@ function searchByGender(people){
   var genderSelection = people.filter(function(person){
     if(person.gender === userInput) {
       return true;
-    }
+    } 
 })
 
   return genderSelection;
