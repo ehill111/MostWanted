@@ -30,7 +30,7 @@ function app(people){
 function selectPerson(people){
   displayPeople(people)
   let finalSelectionPrompt = promptFor("Please pick your option from the list <first name>", chars);
-  let foundPerson = people.filter(function(person){
+  let foundPeople = people.filter(function(person){
     if(person.firstName === finalSelectionPrompt){
       return true;
     }
@@ -42,7 +42,7 @@ function selectPerson(people){
     }
   })
 
-  let person = foundPerson[0];
+  let person = foundPeople[0];
   return person;
   
 }
@@ -64,7 +64,7 @@ function mainMenu(person, people){
       displayPerson(person);
     break;
     case "family":
-    // TODO: get person's family
+    displayFamily(person, people);
     break;
     case "descendants":
     // TODO: get person's descendants
@@ -97,6 +97,22 @@ function getDescendants(person, people, descendants){ //Joy Madden
   //use recursion by calling getDescendants inside the for loop
   //i.e. getDescendants(foundDescendants[0], people);
 
+  var foundDescendants = people.filter(function(children){
+    if(person.id === children.parents[0] || person.id === children.parents[1]){
+      descendants.push(children);
+      return true;
+    }
+    else{
+      return false;
+    }
+  })
+
+  for(var i = 0; i < foundDescendants.length-1; i++){
+    getDescendants(foundDescendants[i], people, descendants);
+  }
+
+  return displayPeople(descendants);
+
 }
 
 function searchByName(people){
@@ -108,7 +124,7 @@ function searchByName(people){
       return true;
     }
     else{
-      return false;f
+      return false;
     }
   })
   return foundPerson;
@@ -222,11 +238,64 @@ function displayPerson(person){
   personInfo += "Weight:" + person.weight + "\n";
   personInfo += "Eye Color:" + person.eyeColor + "\n";
   personInfo += "Occupation:" + person.occupation + "\n";
-  personInfo += "Parents:" + person.parents + "\n";
-  personInfo += "Current Spouse:" + person.currentSpouse + "\n";
-  // TODO: finish getting the rest of the information to display
+
   alert(personInfo);
   return(personInfo);
+}
+
+function displayFamily(person, people){
+  var parents;
+  var currentSpouse;
+  var siblings = [];
+  var familyMembers = [];
+  if (person.parents.length > 0){
+    var parentsId = person.parents.filter(function(parent){
+      return true;
+    }); 
+
+      parents = people.filter(function(person){
+        if(parentsId[0] == person.id || parentsId[1] == person.id){
+          person.Relation = "Parent";
+          familyMembers.push(person);
+          return true;
+        }
+        else{
+          return false;
+        }
+        });     
+  }
+
+  if (person.currentSpouse !== null){
+    currentSpouse = people.filter(function(person){
+      if(person.currentSpouse === person.id){
+        person.Relation = "Spouse";
+        familyMembers.push(person);
+        return true;
+      }
+      else{
+        return false;
+      }
+      });     
+  }
+
+  siblings = people.filter(function(person){
+  if(person.parents[0] == parentsId[0] || person.parents[1] == parentsId[0]){
+    person.Relation = "Sibling";
+    familyMembers.push(person);
+    return true;
+  }
+  else if(person.parents[0] == parentsId[1] || person.parents[1] == parentsId[1]){
+    person.Relation = "Sibling";
+    familyMembers.push(person);
+    return true;
+  }
+  else{
+    return false;
+  }
+  });
+
+  displayPeople(familyMembers);
+  return mainMenu(person,people);
 }
 
 // function that prompts and validates user input (JJ)
