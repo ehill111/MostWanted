@@ -10,22 +10,25 @@ function app(people){
   switch(searchType){
     case 'yes':
       searchResults = searchByName(people);
+      alert("Good choice!")
       break;
     case 'no':
       searchResults = searchByTrait(people);
       break;
       default:
-      if(searchType != "Yes" || searchType != "yes" || searchType != "No" || searchType != "no"){
-        searchResults = prompt("Please enter 'Yes' or 'No'.")
-      }
+      //if(searchType !== "Yes" || searchType !== "yes" || searchType !== "No" || searchType !== "no")
+        //{prompt("Please enter 'Yes' or 'No'.");
+        //alert("hello");
+
+        return false;}
     app(people); // restart app
       break;
   }
 
-  const userSelection = selectPerson(searchResults)
+  const userSelection = selectPerson(searchResults){
   // Call the mainMenu function ONLY after you find the SINGLE person you are looking for
   mainMenu(userSelection, people);
-}
+ }
 
 function selectPerson(people){
   displayPeople(people)
@@ -36,8 +39,8 @@ function selectPerson(people){
     }
     //else if{
       //person.firstName == 
-    }
-    else{
+    
+    else{alert("Hello")
       return false;
     }
   })
@@ -171,6 +174,9 @@ function searchByGender(people){
   var genderSelection = people.filter(function(person){
     if(person.gender === userInput) {
       return true;
+    } else if (person.gender !== userInput) {
+      alert("Please enter 'Male' or 'Female'");
+      return false;
     }
 })
 
